@@ -19,7 +19,26 @@ const server = http.createServer((req, res) => {
           res.end(content);
         },
       );
-    } else {
+    }else if(req.url === "/about"){
+      fs.readFile(path.join(__dirname, "template", "about.html"), "utf-8", (err, content)=>{
+        if(err){
+          throw new Error(err)
+        }
+        res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+        res.end(content);
+      })
+
+    }
+    else if(req.url === "/contact"){
+      fs.readFile(path.join(__dirname, "template", "contact.html"), "utf-8", (err, content)=>{
+        if(err){
+          throw new Error(err)
+        }
+        res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+        res.end(content);
+      })
+
+    }else {
       
       res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
       res.end("404 - Page not found");
